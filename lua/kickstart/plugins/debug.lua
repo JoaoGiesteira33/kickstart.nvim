@@ -20,12 +20,6 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
-    'mxsdev/nvim-dap-vscode-js',
-    {
-      'microsoft/vscode-js-debug',
-      version = '1.x',
-      build = 'npm i && npm run compile vsDebugServerBundle && mv dist out',
-    },
   },
   keys = {
     {
@@ -145,12 +139,6 @@ return {
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
       },
-    }
-
-    -- Install vscode-js specific config
-    require('dap-vscode-js').setup {
-      debugger_path = vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug',
-      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
     }
   end,
 }
