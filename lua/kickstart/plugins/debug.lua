@@ -7,11 +7,8 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
     -- Required dependency for nvim-dap-ui
@@ -23,9 +20,14 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mxsdev/nvim-dap-vscode-js',
+    {
+      'microsoft/vscode-js-debug',
+      version = '1.x',
+      build = 'npm i && npm run compile vsDebugServerBundle && mv dist out',
+    },
   },
   keys = {
-    -- Basic debugging keymaps, feel free to change to your liking!
     {
       '<F5>',
       function()
@@ -34,21 +36,21 @@ return {
       desc = 'Debug: Start/Continue',
     },
     {
-      '<F1>',
+      '<F11>',
       function()
         require('dap').step_into()
       end,
       desc = 'Debug: Step Into',
     },
     {
-      '<F2>',
+      '<F10>',
       function()
         require('dap').step_over()
       end,
       desc = 'Debug: Step Over',
     },
     {
-      '<F3>',
+      '<S-F11>',
       function()
         require('dap').step_out()
       end,
@@ -143,6 +145,12 @@ return {
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
       },
+    }
+
+    -- Install vscode-js specific config
+    require('dap-vscode-js').setup {
+      debugger_path = vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug',
+      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
     }
   end,
 }
