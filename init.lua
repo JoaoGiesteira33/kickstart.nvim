@@ -10,6 +10,7 @@ vim.g.have_nerd_font = true
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.wrap = false
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -33,7 +34,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
-vim.opt.colorcolumn = '100'
+vim.opt.colorcolumn = '120'
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -58,6 +59,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Vertical movement keymaps
+vim.keymap.set({ 'n', 'v' }, 'J', '5j', { desc = 'Move 5 lines down' })
+vim.keymap.set({ 'n', 'v' }, 'K', '5k', { desc = 'Move 5 lines up' })
+
+-- Keep Keyword Help
+vim.keymap.set('n', '<M-h>', vim.lsp.buf.hover, { desc = 'Show LSP hover information ' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -69,6 +77,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Quickfix keymaps
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
+vim.keymap.set('n', '<M-q>', '<cmd>cclose<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
